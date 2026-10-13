@@ -8,11 +8,32 @@ import { about, education, experience, pillars, profile, projects, skills } from
 const seed = {
   id: 'hello',
   role: 'assistant',
-  text: "Hi — I'm Sakshi's AI twin. I live in this page and know her resume by heart. Ask me about her work, projects, or how to reach her.",
+  text: "Hi — I'm Sakshi's AI twin. Ask me about her projects, skills, experience, or how to reach her.",
   source: 'Welcome',
 }
 
 const chapterLabel = ['Now', 'Previously', 'Before that']
+
+const writingHighlights = [
+  {
+    number: '01',
+    area: 'Compliance AI',
+    title: 'From policy text to measurable controls',
+    text: 'Guardiance turns HIPAA, financial, and security rules into semantic matches, entity checks, risk scores, and deterministic validations.',
+  },
+  {
+    number: '02',
+    area: 'Agent Systems',
+    title: 'Making model routing useful in production',
+    text: 'IntelliConnect routes tasks across models, tools, memory, and retrieval so enterprise workflows can move without manual handoffs.',
+  },
+  {
+    number: '03',
+    area: 'Healthcare Automation',
+    title: 'Five agents for one appointment workflow',
+    text: 'The Google ADK system handles patient intake, symptom mapping, scheduling, and follow-up automation with Sheets, Gmail, MCP, and n8n.',
+  },
+]
 
 function speak(text, onEnd) {
   if (!window.speechSynthesis) {
@@ -40,7 +61,6 @@ export default function App() {
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
   const [muted, setMuted] = useState(true)
-  const [menuOpen, setMenuOpen] = useState(false)
   const typeTimer = useRef(0)
 
   useEffect(() => {
@@ -97,66 +117,74 @@ export default function App() {
     }, 480)
   }
 
-  const closeMenu = () => setMenuOpen(false)
-
   return (
-    <>
-      <a className="skip" href="#studio">
-        Skip to content
-      </a>
-
-      <header className="nav">
-        <a className="brand" href="#studio">
-          <span>Sakshi Menghani</span>
-          <small>AI/ML Engineer</small>
+    <main className="site-shell" id="top">
+      <header className="site-header" aria-label="Main navigation">
+        <a className="brand" href="#top" aria-label={`${profile.name}, home`}>
+          {profile.name}
+          <span className="brand-spark" aria-hidden="true">✦</span>
         </a>
-        <button
-          type="button"
-          className="menu-btn"
-          aria-expanded={menuOpen}
-          aria-controls="site-nav"
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          Menu
-        </button>
-        <nav id="site-nav" className={menuOpen ? 'open' : ''} onClick={closeMenu}>
-          <a href="#studio">Twin</a>
-          <a href="#now">Now</a>
-          <a href="#work">Work</a>
+        <nav className="nav-links" aria-label="Primary">
+          <a href="#focus">Focus</a>
+          <a href="#journey">Journey</a>
+          <a href="#twin">AI Twin</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
-          <a className="resume" href={`./${profile.resume}`} download>
-            Resume
-          </a>
+          <a href={`./${profile.resume}`} download>Resume</a>
         </nav>
+        <p className="status-note">
+          <span className="status-dot" aria-hidden="true"></span>
+          GenAI · RAG · Agents
+        </p>
       </header>
 
-      <main>
-        <section id="studio" className="hero">
-          <div className="hero-copy">
-            <p className="kicker">hello from the studio</p>
-            <h1>
-              Hi, I’m {profile.firstName}. I build GenAI systems that people can actually trust.
-            </h1>
-            <p className="lede">{profile.tagline}</p>
-            <p className="flourish">research brain, shipping hands</p>
-            <div className="hero-actions">
-              <a className="btn" href="#studio-stage">
-                Talk to my twin
-              </a>
-              <a className="btn ghost" href={`mailto:${profile.email}`}>
-                Email Sakshi
-              </a>
-            </div>
+      <section className="hero personal-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">
+            <span>{profile.name}</span>
+            <span aria-hidden="true">·</span>
+            {profile.role}
+          </p>
+          <h1>
+            Hi, I’m {profile.firstName}. I build AI systems that turn messy workflows into
+            <span className="word-mark"> measurable products</span>.
+          </h1>
+          <p className="hero-description">{about.intro}</p>
+          <div className="hero-actions">
+            <a className="text-link text-link-primary" href={profile.linkedin} target="_blank" rel="noreferrer">
+              Meet me on LinkedIn <span aria-hidden="true">→</span>
+            </a>
+            <a className="text-link" href="#twin">
+              Talk to my AI twin <span aria-hidden="true">→</span>
+            </a>
           </div>
+          <p className="tiny-note">
+            research brain, shipping hands <span aria-hidden="true">♡</span>
+          </p>
+        </div>
 
-          <div id="studio-stage" className="stage">
-            <div className="stage-frame">
+        <div className="orbit-stage" id="twin">
+          <div className="orbit-decor" aria-hidden="true">
+            <div className="orbit orbit-one"></div>
+            <div className="orbit orbit-two"></div>
+            <div className="orbit orbit-three"></div>
+            <div className="axis axis-x"></div>
+            <div className="axis axis-y"></div>
+            <div className="memory-node node-one"><span>retrieve</span></div>
+            <div className="memory-node node-two"><span>reason</span></div>
+            <div className="memory-node node-three"><span>route</span></div>
+            <div className="memory-node node-four"><span>ship</span></div>
+            <div className="fish-mark"><span>agents in motion</span></div>
+            <div className="spark-cluster spark-one">· · ✦ ·</div>
+            <div className="spark-cluster spark-two">✦ · ·</div>
+            <p className="diagram-note">data → context → action</p>
+          </div>
+          <div className="avatar-card">
+            <div className="avatar-canvas">
               <Suspense fallback={<div className="stage-fallback">Waking the twin…</div>}>
                 <AvatarScene state={avatarState} />
               </Suspense>
-              <div className="stage-vignette" />
             </div>
             <ChatPanel
               messages={messages}
@@ -169,168 +197,213 @@ export default function App() {
               status={status}
             />
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="now" className="section">
-          <div className="section-head">
-            <p className="kicker">Now · building</p>
-            <h2>The current chapter, plus just enough backstory.</h2>
-            <p className="aside">details belong on LinkedIn</p>
-          </div>
-          <div className="about-grid">
-            <div className="about-copy">
-              <p>{about.intro}</p>
-              <p>{about.focus}</p>
-            </div>
-            <ul className="stats">
-              {about.stats.map((s) => (
-                <li key={s.label}>
-                  <strong>{s.value}</strong>
-                  <span>{s.label}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+      <section className="now-strip" aria-label="Professional introduction">
+        <p className="section-kicker">Now · building</p>
+        <p>{profile.tagline}</p>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">Full profile ↗︎</a>
+      </section>
 
-        <section className="section pillars-wrap">
-          <div className="section-head">
-            <p className="kicker">the messy middle</p>
-            <h2>Model work, systems work, and the bridge between them.</h2>
-          </div>
-          <ol className="pillars">
-            {pillars.map((p) => (
-              <li key={p.no}>
-                <span className="no">{p.no}</span>
-                <p className="meta">{p.kicker}</p>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section id="work" className="section">
-          <div className="section-head">
-            <p className="kicker">experience</p>
-            <h2>Where the work happened.</h2>
-          </div>
-          <ol className="timeline">
-            {experience.map((job, i) => (
-              <li key={job.company}>
-                <p className="meta">{chapterLabel[i] || 'Earlier'}</p>
-                <div className="job-top">
-                  <h3>
-                    {job.role} · {job.company}
-                  </h3>
-                  <p className="when">
-                    {job.period} · {job.place}
-                  </p>
-                </div>
-                <ul>
-                  {job.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
-                  ))}
-                </ul>
-                <p className="tags">
-                  {job.tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section id="projects" className="section">
-          <div className="section-head">
-            <p className="kicker">selected work</p>
-            <h2>Three systems, three measurable wins.</h2>
-          </div>
-          <div className="projects">
-            {projects.map((p) => (
-              <article key={p.name} style={{ '--accent': p.accent }}>
-                <p className="metric">
-                  <strong>{p.metric}</strong>
-                  <span>{p.metricLabel}</span>
-                </p>
-                <h3>{p.name}</h3>
-                <p className="meta">{p.subtitle}</p>
-                <p>{p.text}</p>
-                <p className="tags">
-                  {p.tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="skills" className="section split">
+      <section className="focus-section" id="focus">
+        <div className="section-intro">
+          <p className="section-kicker">What I do</p>
           <div>
-            <div className="section-head">
-              <p className="kicker">stack</p>
-              <h2>The tools I reach for.</h2>
-            </div>
-            <div className="skill-groups">
-              {skills.map((g) => (
-                <div key={g.group}>
-                  <h3>{g.group}</h3>
-                  <p className="tags">
-                    {g.items.map((t) => (
-                      <span key={t}>{t}</span>
-                    ))}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <h2>Model work, systems work, and the bridge between them.</h2>
+            <p className="section-summary">{about.focus}</p>
           </div>
-          <aside className="edu">
-            <p className="kicker">education</p>
-            <h2>{education.degree}</h2>
-            <p className="meta">{education.focus}</p>
-            <p>
-              {education.school}
-              <br />
-              {education.place} · {education.period}
-            </p>
-            <p className="tags">
-              {education.coursework.map((c) => (
-                <span key={c}>{c}</span>
-              ))}
-            </p>
-          </aside>
-        </section>
+        </div>
+        <div className="focus-grid">
+          {pillars.map((pillar) => (
+            <article className="focus-card" key={pillar.no}>
+              <div className="card-topline">
+                <span>{pillar.no}</span>
+                <p>{pillar.kicker}</p>
+              </div>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <section id="contact" className="section contact">
-          <p className="kicker">let’s talk</p>
-          <h2>Internships, collaborations, and the next hard problem.</h2>
-          <p className="lede">
-            Open to AI/ML engineering conversations — especially GenAI, RAG, agentic systems, and work in regulated
-            industries.
+      <section className="journey-section" id="journey">
+        <div className="journey-title">
+          <p className="section-kicker">A short timeline</p>
+          <h2>
+            The current chapter,
+            <br />
+            plus just enough backstory.
+          </h2>
+          <p className="about-handnote">details belong on LinkedIn 〰</p>
+        </div>
+        <div className="journey-list">
+          {experience.map((job, index) => (
+            <article key={job.company}>
+              <p className="journey-date">{chapterLabel[index] || 'Earlier'}</p>
+              <div>
+                <h3>{job.role} · {job.company}</h3>
+                <p className="journey-meta">{job.period} · {job.place}</p>
+                <p>{job.points[0]}</p>
+              </div>
+            </article>
+          ))}
+          <article className="journey-personal">
+            <p className="journey-date">Education</p>
+            <div>
+              <h3>{education.degree} · {education.school}</h3>
+              <p>{education.focus}. Coursework: {education.coursework.join(', ')}.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="speaking-section" id="featured">
+        <div className="speaking-heading">
+          <p className="section-kicker">Featured system</p>
+          <h2>One AI twin, one resume, zero paid APIs.</h2>
+          <p>
+            The avatar is a free, browser-only Three.js experience with a tiny retrieval engine over Sakshi's resume.
+            It keeps the portfolio interactive while remaining GitHub Pages friendly.
           </p>
-          <div className="contact-row">
-            <a className="btn" href={`mailto:${profile.email}`}>
-              {profile.email}
-            </a>
-            <a className="btn ghost" href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a className="btn ghost" href={profile.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            <a className="btn ghost" href="tel:+16673698506">
-              +1 (667) 369-8506
+        </div>
+        <article className="talk-card">
+          <div className="talk-cover">
+            <Suspense fallback={<div className="stage-fallback">Loading 3D scene…</div>}>
+              <AvatarScene state={avatarState} />
+            </Suspense>
+            <span>Ask the AI twin ↗︎</span>
+          </div>
+          <div className="talk-copy">
+            <div className="talk-meta">
+              <span>React</span>
+              <span>Three.js</span>
+              <span>Client-side RAG</span>
+            </div>
+            <p className="talk-event">Free to host</p>
+            <h3>A portfolio assistant that speaks from the resume.</h3>
+            <p>
+              Visitors can ask about Guardiance, IntelliConnect, current work, skills, education, and contact details.
+              No server, no OpenAI key, and no recurring hosting cost.
+            </p>
+            <div className="talk-actions">
+              <a className="text-link text-link-primary" href="#twin">Try it <span aria-hidden="true">→</span></a>
+              <a className="text-link" href={`./${profile.resume}`} download>Download resume <span aria-hidden="true">↗︎</span></a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section className="home-topics-section" id="projects">
+        <div className="section-intro topics-intro">
+          <p className="section-kicker">Selected work</p>
+          <div>
+            <h2>Follow a problem, not just a project list.</h2>
+            <p className="section-summary">
+              Each project is framed around the workflow it improved, the stack behind it, and the measurable result.
+            </p>
+          </div>
+        </div>
+        <div className="topic-card-grid">
+          {projects.map((project, index) => (
+            <article className={`topic-card topic-card-${index === 1 ? 'sage' : index === 2 ? 'sand' : 'ink'}`} key={project.name}>
+              <div className="topic-card-topline">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{project.subtitle}</p>
+              </div>
+              <div className="topic-path" aria-hidden="true">
+                {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                  <div key={tag}>
+                    <span>{tag}</span>
+                    {tagIndex < 2 ? <i>→</i> : null}
+                  </div>
+                ))}
+              </div>
+              <h3>{project.name}</h3>
+              <p className="topic-card-copy">{project.text}</p>
+              <div className="topic-card-footer">
+                <span><strong>{project.metric}</strong> {project.metricLabel}</span>
+                <small aria-hidden="true">case study ↗︎</small>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="writing-section" id="writing">
+        <div className="section-intro writing-intro">
+          <p className="section-kicker">Technical notes</p>
+          <div>
+            <a className="text-link text-link-primary" href={profile.github} target="_blank" rel="noreferrer">
+              Explore GitHub <span aria-hidden="true">→</span>
             </a>
           </div>
-        </section>
-      </main>
+        </div>
+        <div className="writing-list">
+          {writingHighlights.map((item) => (
+            <article className="writing-card" key={item.number}>
+              <p className="writing-number">{item.number}</p>
+              <div className="writing-meta">
+                <span>{item.area}</span>
+                <span>Resume-backed</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <span className="card-arrow" aria-hidden="true">↗︎</span>
+            </article>
+          ))}
+        </div>
+      </section>
 
-      <footer className="foot">
-        <p>© {new Date().getFullYear()} {profile.name}</p>
-        <p>React + Three.js · hosted for free on GitHub Pages · no API keys</p>
+      <section className="little-life-section" id="skills">
+        <div className="section-intro">
+          <p className="section-kicker">Stack</p>
+          <div>
+            <h2>The tools I reach for.</h2>
+            <p className="section-summary">
+              AI frameworks, vector stores, cloud platforms, and data engineering tools used across production systems.
+            </p>
+          </div>
+        </div>
+        <div className="little-life-grid">
+          {skills.map((group) => (
+            <article className="little-life-card" key={group.group}>
+              <span className="life-icon" aria-hidden="true">◎</span>
+              <p>{group.group}</p>
+              <h3>{group.items.slice(0, 4).join(' · ')}</h3>
+              <span>{group.items.slice(4).join(' · ') || 'production ready'}</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-section" id="contact">
+        <p className="section-kicker">Let's build</p>
+        <h2>Internships, collaborations, and the next hard problem.</h2>
+        <p>
+          Open to AI/ML engineering conversations, especially GenAI, RAG, agentic systems, automation, and AI for
+          regulated industries.
+        </p>
+        <div className="contact-links">
+          <a className="text-link text-link-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a className="text-link" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗︎</a>
+          <a className="text-link" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗︎</a>
+          <a className="text-link" href="tel:+16673698506">+1 (667) 369-8506</a>
+        </div>
+      </section>
+
+      <footer className="site-footer">
+        <div>
+          <p className="footer-name">{profile.name}</p>
+          <p>Building practical GenAI systems in the United States.</p>
+        </div>
+        <p className="footer-evolving">
+          <span className="mini-fish" aria-hidden="true"></span>
+          still learning, still shipping ♡
+        </p>
+        <a href="#top">Back to top ↑</a>
       </footer>
-    </>
+    </main>
   )
 }
