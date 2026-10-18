@@ -324,6 +324,14 @@ export default function App() {
                 <h3>{project.name}</h3>
                 <p className="topic-card-copy">{project.text}</p>
                 {project.detail ? <p className="topic-card-copy topic-card-detail">{project.detail}</p> : null}
+                {project.stack ? (
+                  <div className="topic-stack">
+                    <span className="topic-stack-label">Tech stack</span>
+                    <ul>
+                      {project.stack.map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                  </div>
+                ) : null}
                 <div className="topic-card-footer">
                   <span><strong>{project.metric}</strong> {project.metricLabel}</span>
                   {project.link ? (

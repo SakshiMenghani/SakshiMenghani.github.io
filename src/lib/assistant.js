@@ -41,14 +41,14 @@ const knowledge = [
     id: 'projects',
     keywords: ['project', 'projects', 'built', 'portfolio', 'showcase', 'build', 'made'],
     answer:
-      'Four highlights: VeriArm, a voice checkout robot arm built in two days at the Viam hackathon; Guardiance, an AI compliance intelligence platform (~70% less manual review); IntelliConnect, an enterprise multi-agent orchestration platform (~60% faster turnaround); and a five-agent Google ADK healthcare appointment system (~65% less scheduling effort). Ask me about any of them!',
+      'Four highlights: VeriArm, an embodied AI voice checkout robot built in two days at the Viam hackathon; Guardiance, an AI compliance intelligence platform (~70% less manual review); IntelliConnect, an enterprise multi-agent orchestration platform (~60% faster turnaround); and a five-agent Google ADK healthcare appointment system (~65% less scheduling effort). Ask me about any of them!',
     source: 'Projects',
   },
   {
     id: 'veriarm',
-    keywords: ['veriarm', 'robot', 'robotics', 'arm', 'viam', 'hackathon', 'checkout', 'package', 'voice', 'camera', 'pick'],
+    keywords: ['veriarm', 'robot', 'robotics', 'arm', 'viam', 'hackathon', 'checkout', 'package', 'voice', 'camera', 'pick', 'embodied', 'perception', 'speech'],
     answer:
-      'VeriArm is a voice checkout robot arm Sakshi built with Sandy Zhao and Yixin in two days at the Viam "Code That Moves" hackathon. The arm finds a package with a depth camera, reads its QR label, checks payment and shipping in the inventory, talks the customer through payment and an email notification by voice (ElevenLabs speech plus Claude to understand answers), then picks the box and places it in the Standard or Express shipping zone. Sakshi built the label inspection and verification, the inventory with payments and email notifications, the control panel and the main loop. The code is on GitHub at SakshiMenghani/VeriArm.',
+      'VeriArm is an embodied AI system Sakshi built with a team of three in two days at the Viam "Code That Moves" hackathon: a robot arm that runs a package checkout counter. RGB-D perception finds the box and reads its QR label, an LLM layer (Claude structured outputs, with ElevenLabs speech-to-text and voice) turns free-form speech into payment, shipping and email decisions, and the arm sorts each package by shipping speed. Sakshi owned the verification and inventory layer, the control panel and the voice pipeline\'s reliability, taking first-try understanding from 3 of 6 to 9 of 9 answers and reply time from 3-5 s to about 0.5 s. The code is on GitHub at SakshiMenghani/VeriArm.',
     source: 'Projects · VeriArm',
   },
   {

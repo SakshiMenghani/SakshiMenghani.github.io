@@ -1266,6 +1266,37 @@ body {
   font-size: 0.95em;
 }
 
+.topic-stack {
+  margin-top: 22px;
+}
+
+.topic-stack-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.topic-stack ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-stack li {
+  padding: 5px 11px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
 .topic-card-media {
   display: grid;
   grid-template-columns: 1fr 1fr;
