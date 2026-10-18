@@ -1238,6 +1238,62 @@ body {
   margin-top: 30px;
 }
 
+.topic-card-footer a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* Featured project (VeriArm): full width, text beside its demo video and team photo */
+.topic-card-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.topic-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.topic-card-featured .topic-card-footer {
+  margin-top: auto;
+  padding-top: 30px;
+}
+
+.topic-card-detail {
+  font-size: 0.95em;
+}
+
+.topic-card-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.topic-card-media video,
+.topic-card-media img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #000;
+  display: block;
+}
+
+@media (max-width: 980px) {
+  .topic-card-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .topic-card-media {
+    grid-template-columns: 1fr;
+  }
+}
+
 .writing-list {
   display: grid;
   gap: 0;

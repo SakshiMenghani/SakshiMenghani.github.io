@@ -306,28 +306,60 @@ export default function App() {
           </div>
         </div>
         <div className="topic-card-grid">
-          {projects.map((project, index) => (
-            <article className={`topic-card topic-card-${index === 1 ? 'sage' : index === 2 ? 'sand' : 'ink'}`} key={project.name}>
-              <div className="topic-card-topline">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <p>{project.subtitle}</p>
-              </div>
-              <div className="topic-path" aria-hidden="true">
-                {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                  <div key={tag}>
-                    <span>{tag}</span>
-                    {tagIndex < 2 ? <i>→</i> : null}
-                  </div>
-                ))}
-              </div>
-              <h3>{project.name}</h3>
-              <p className="topic-card-copy">{project.text}</p>
-              <div className="topic-card-footer">
-                <span><strong>{project.metric}</strong> {project.metricLabel}</span>
-                <small aria-hidden="true">case study ↗︎</small>
-              </div>
-            </article>
-          ))}
+          {projects.map((project, index) => {
+            const body = (
+              <>
+                <div className="topic-card-topline">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p>{project.subtitle}</p>
+                </div>
+                <div className="topic-path" aria-hidden="true">
+                  {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                    <div key={tag}>
+                      <span>{tag}</span>
+                      {tagIndex < 2 ? <i>→</i> : null}
+                    </div>
+                  ))}
+                </div>
+                <h3>{project.name}</h3>
+                <p className="topic-card-copy">{project.text}</p>
+                {project.detail ? <p className="topic-card-copy topic-card-detail">{project.detail}</p> : null}
+                <div className="topic-card-footer">
+                  <span><strong>{project.metric}</strong> {project.metricLabel}</span>
+                  {project.link ? (
+                    <a href={project.link} target="_blank" rel="noreferrer">{project.linkLabel || 'case study ↗︎'}</a>
+                  ) : (
+                    <small aria-hidden="true">case study ↗︎</small>
+                  )}
+                </div>
+              </>
+            )
+            return (
+              <article
+                className={`topic-card topic-card-${project.tone || 'ink'}${project.featured ? ' topic-card-featured' : ''}`}
+                key={project.name}
+              >
+                {project.featured && project.media ? (
+                  <>
+                    <div className="topic-card-body">{body}</div>
+                    <div className="topic-card-media">
+                      <video
+                        src={project.media.video}
+                        poster={project.media.poster}
+                        controls
+                        playsInline
+                        preload="none"
+                        aria-label={project.media.videoLabel}
+                      />
+                      <img src={project.media.photo} alt={project.media.photoAlt} loading="lazy" />
+                    </div>
+                  </>
+                ) : (
+                  body
+                )}
+              </article>
+            )
+          })}
         </div>
       </section>
 

@@ -85,6 +85,28 @@ export const experience = [
 
 export const projects = [
   {
+    name: 'VeriArm',
+    subtitle: 'Voice Checkout Robot Arm · Viam Hackathon',
+    metric: '2 days',
+    metricLabel: 'from idea to a live robot demo',
+    text: 'A robot arm that runs a package checkout counter. It finds the box with a depth camera, reads its QR label, checks payment and shipping in the inventory, talks the customer through payment and an email notification by voice, then picks the box and places it in the Standard or Express shipping zone.',
+    detail:
+      'Built at the Viam “Code That Moves” hackathon with Sandy Zhao and Yixin. I built label inspection and verification, the inventory with payments, shipping and email notifications, the control panel and the main loop, and tuned the voice loop to answer in under a second.',
+    tags: ['Viam', 'OpenCV', 'Claude', 'ElevenLabs', 'SQLite', 'Python'],
+    accent: '#ffb38f',
+    tone: 'ink',
+    featured: true,
+    link: 'https://github.com/SakshiMenghani/VeriArm',
+    linkLabel: 'code ↗︎',
+    media: {
+      video: 'projects/veriarm/veriarm-demo.mp4',
+      poster: 'projects/veriarm/veriarm-demo-poster.jpg',
+      videoLabel: 'VeriArm demo: the arm picks a package from the blue checkout zone and places it in the shipping zones',
+      photo: 'projects/veriarm/veriarm-team.jpg',
+      photoAlt: 'Sakshi with teammates Sandy and Yixin at the VeriArm table: the robot arm, the blue checkout zone, and the green Standard and orange Express shipping zones',
+    },
+  },
+  {
     name: 'Guardiance',
     subtitle: 'AI-Powered Compliance Intelligence Platform',
     metric: '~70%',
@@ -92,6 +114,7 @@ export const projects = [
     text: 'A multi-layer compliance detection pipeline combining semantic policy matching, entity extraction, contextual risk scoring and deterministic validation across 38+ HIPAA, financial and security controls.',
     tags: ['OpenAI', 'GPT-OSS', 'Guardrails AI', 'NER', 'Pinecone'],
     accent: '#ff8fab',
+    tone: 'ink',
   },
   {
     name: 'IntelliConnect',
@@ -101,6 +124,7 @@ export const projects = [
     text: 'A scalable, model-agnostic orchestration layer with contextual memory, role-based access control, dynamic agent and model routing, and retrieval-backed execution across support, healthcare, banking and finance.',
     tags: ['LLMs', 'MCP', 'OpenRouter', 'RAG', 'CoT', 'Weaviate'],
     accent: '#8fb8ff',
+    tone: 'sage',
   },
   {
     name: 'CareFlow Agents',
@@ -110,6 +134,7 @@ export const projects = [
     text: 'A five-agent system for patient intake, symptom mapping, scheduling and communication, integrating Google Sheets and Gmail via MCP, automating follow-ups with n8n and routing calls through OpenRouter.',
     tags: ['Google ADK', 'MCP', 'OpenRouter', 'n8n', 'Gmail API'],
     accent: '#9ff0c8',
+    tone: 'sand',
   },
 ]
 

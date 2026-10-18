@@ -41,8 +41,15 @@ const knowledge = [
     id: 'projects',
     keywords: ['project', 'projects', 'built', 'portfolio', 'showcase', 'build', 'made'],
     answer:
-      'Three highlights: Guardiance, an AI compliance intelligence platform (~70% less manual review); IntelliConnect, an enterprise multi-agent orchestration platform (~60% faster turnaround); and a five-agent Google ADK healthcare appointment system (~65% less scheduling effort). Ask me about any of them!',
+      'Four highlights: VeriArm, a voice checkout robot arm built in two days at the Viam hackathon; Guardiance, an AI compliance intelligence platform (~70% less manual review); IntelliConnect, an enterprise multi-agent orchestration platform (~60% faster turnaround); and a five-agent Google ADK healthcare appointment system (~65% less scheduling effort). Ask me about any of them!',
     source: 'Projects',
+  },
+  {
+    id: 'veriarm',
+    keywords: ['veriarm', 'robot', 'robotics', 'arm', 'viam', 'hackathon', 'checkout', 'package', 'voice', 'camera', 'pick'],
+    answer:
+      'VeriArm is a voice checkout robot arm Sakshi built with Sandy Zhao and Yixin in two days at the Viam "Code That Moves" hackathon. The arm finds a package with a depth camera, reads its QR label, checks payment and shipping in the inventory, talks the customer through payment and an email notification by voice (ElevenLabs speech plus Claude to understand answers), then picks the box and places it in the Standard or Express shipping zone. Sakshi built the label inspection and verification, the inventory with payments and email notifications, the control panel and the main loop. The code is on GitHub at SakshiMenghani/VeriArm.',
+    source: 'Projects · VeriArm',
   },
   {
     id: 'guardiance',
@@ -185,7 +192,7 @@ export function ask(question) {
 
   if (!best || bestScore < 0.5) {
     return {
-      text: "Hmm, that one isn't in my memory yet. Try asking about Sakshi's current role, her projects (Guardiance, IntelliConnect), RAG, skills, education or how to contact her.",
+      text: "Hmm, that one isn't in my memory yet. Try asking about Sakshi's current role, her projects (VeriArm, Guardiance, IntelliConnect), RAG, skills, education or how to contact her.",
       source: 'Fallback',
     }
   }
